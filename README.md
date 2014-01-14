@@ -1,5 +1,5 @@
-Project-ATLAS - v0.0.1
-======================
+Project-ATLAS - v0.0.1 - Pre-Alpha
+==================================
 
 WSU Robotics Voice Recognition Program
 
