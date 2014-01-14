@@ -1,0 +1,70 @@
+Reference #1:
+
+1 |	From the beginning of the main function to the marking to read this section, the snippit can be explained in 3 parts:
+2 |	
+3 |	§1.1 - Allocating Memory:
+4 |	
+5 |		1 |	[INSERTION]
+6 |		2 |	
+7 |		3 |	>FMOD_SYSTEM			 *system;
+8 |		4 |	>FMOD_SOUND				 *sound;
+9 |		5 |	>FMOD_CHANNEL			 *channel;
+10|		6 |	>FILE					 *MicStream;
+11|		7 |	>FMOD_CREATESOUNDEXINFO	 exinfo;
+12|		8 |	>
+13|		9 |	>int num_driver = 0, count, driver, recorddriver;
+14|		10|	>char key;
+15|		11|	
+16|		12|	[END INSERTION]
+17|	
+18|	[3]	 FMOD_SYSTEM:			  Basically the underling object for FMOD, it contains essental components for the system to function. So keep it.
+19| [4]	 FMOD_SOUND:		      A Subsystem function used to manage sound controll objects and such.
+20| [5]	 FMOD_CHANNEL:			  An internal channel managing system, like the channels of a TV FMOD can have multiple streems running at the same time. Up to 1,000 to be exact.
+21| [6]	 FILE:					  Simple file stream for saving to a wav file.
+22| [7]	 FMOD_CREATESOUNDEXINFO:  A file handle for FMOD, required to write and load files from memory.
+23| [9]	 num_driver:			  Used in loops to compare to the number of auditory drivers found.
+24| [9]	 count:					  for loop variable for incramenting.
+25| [9]	 driver:				  The index for what driver to user after user has entered a number from driver selection menu.
+26| [9]	 recorddriver:			  Same as above, but with mic drivers instead of output drivers.
+27| [10] key:					  Scanned in as user input.
+28| 
+29| §1.2 - Getting Drivers:
+30| 
+31|		1 |	[INSERTION]
+32|		2 |
+33|		3 |	MicStream = fopen("Mic.wav", "wb");
+34|		4 |
+35|		5 |    ERRCHECK(FMOD_System_Create(&system));
+36|		6 |    ERRCHECK(FMOD_System_Init(system, 5, FMOD_INIT_NORMAL, NULL));
+37|		7 |	
+38|		8 |	ERRCHECK(FMOD_System_GetNumDrivers(system, &num_driver));
+39|		9 |
+40|		10|	printf("---------------------------------------------------------\n");    
+41|		11|    printf("Choose a PLAYBACK driver\n");
+42|		12|    printf("---------------------------------------------------------\n");    
+43|		13|    for (count = 0; count < num_driver; count++)
+44|		14|    {
+45|		15|        char name[256];
+46|		16|
+47|		17|        ERRCHECK(FMOD_System_GetDriverInfo(system, count, name, 256, 0));
+48|		18|
+49|		19|        printf("%d : %s\n", count + 1, name);
+50|		20|    }
+51|		21|
+52|		22|    printf("---------------------------------------------------------\n\n");
+53|		23|    printf("Press a corresponding number or ESC to quit\n\n>");
+54|		24|
+55|		25|    do
+56|		26|    {
+57|		27|        key = _getch();
+58|		28|        if (key == 27)
+59|		29|        {
+60|		30|            return 0;
+61|		31|        }
+62|		32|           driver = key - '1';
+63|		33|      } while (driver < 0 || driver >= num_driver);
+64|		34|
+65|		35|	[END INSERTION]
+66|
+67|		[3] fopen: Allocates memory to the file stream
+68|		[4] 
