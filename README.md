@@ -1,6 +1,8 @@
 Project-ATLAS - v0.0.1 - Pre-Alpha
 ==================================
 
+ATLAS - (Automated Telecommunitive Labratory Aid System)
+
 WSU Robotics Voice Recognition Program
 
 Contains the pre-alpha build of the project - v0.0.1
